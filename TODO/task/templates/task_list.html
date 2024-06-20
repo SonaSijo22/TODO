@@ -1,0 +1,42 @@
+{% extends "base.html" %} 
+
+{% block content %}
+
+<div class="todo-container">
+  <div class="todo-search">
+    <form action="" method="post" enctype="multipart/form-data">
+      {%csrf_token%}
+      {{form.title}}
+
+      <button type="submit">ADD</button>
+
+  </form>
+</div>
+
+<div class="todo-list">
+  {% for t in data %}
+
+  <div class="todo-list-item">
+    <div class="task">
+      <input type="checkbox" />
+      <p>{{t.title}}</p>
+    </div> 
+    <div class="btn-container">
+      <div class="edit">
+        <a href="{% url 'task-update' t.id %}">
+          <i class="fa-solid fa-pen-to-square">u</i>
+        </a>
+      </div>
+      <div class="del">
+        <a href="{% url 'task-delete' t.id %}" onclick="return confirm('Are you sure you want to delete')" >
+          
+          <i class="fa-solid fa-trash-can">d</i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock content %}
